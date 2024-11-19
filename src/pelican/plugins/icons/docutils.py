@@ -61,9 +61,9 @@ class IconInliner:
         rawtext
             A string containing the entire interpreted text input, including the role
             and markup. Return it as a problematic node linked to a system message if a
-            problem is encountered. (example: ``:svg:'data'``)
+            problem is encountered. (example: ``:svg:'data'``).
         text
-            The interpreted text content. (example: ``data``)
+            The interpreted text content. (example: ``data``).
         lineno
             The line number where the text block containing the interpreted text begins.
         inliner
@@ -91,7 +91,7 @@ class IconInliner:
         assert name == "svg"
         xml = utils.load_svg_icon(text, self.basepath)
         return [
-            docutils.nodes.raw(
+            docutils.nodes.raw(  # type: ignore[list-item]
                 "",
                 ET.tostring(xml, encoding="unicode", short_empty_elements=False),
                 format="html",
@@ -123,9 +123,9 @@ class IconInliner:
         rawtext
             A string containing the entire interpreted text input, including the role
             and markup. Return it as a problematic node linked to a system message if a
-            problem is encountered. (example: ``:svg:'data'``)
+            problem is encountered. (example: ``:svg:'data'``).
         text
-            The interpreted text content. (example: ``data``)
+            The interpreted text content. (example: ``data``).
         lineno
             The line number where the text block containing the interpreted text begins.
         inliner
@@ -153,7 +153,7 @@ class IconInliner:
         assert name == "icon"
         xml = utils.make_webfont_icon(text)
         return [
-            docutils.nodes.raw(
+            docutils.nodes.raw(  # type: ignore[list-item]
                 "",
                 ET.tostring(xml, encoding="unicode", short_empty_elements=False),
                 format="html",

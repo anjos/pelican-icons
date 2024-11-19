@@ -18,15 +18,27 @@ from . import utils
 
 
 class IconSVGInlineProcessor(markdown.inlinepatterns.InlineProcessor):
-    """Transform SVG icon annotations into HTML."""
+    """Transform SVG icon annotations into HTML.
+
+    Parameters
+    ----------
+    pattern
+        The pattern we are matching.
+    md
+        The markdown parser.
+    basepath
+        The base path where SVG icons are installed.
+    """
 
     def __init__(
-        self, pattern: str, md: markdown.core.Markdown, basepath: pathlib.Path
+        self, pattern: str, md: markdown.core.Markdown | None, basepath: pathlib.Path
     ):
         self.basepath = basepath
         super().__init__(pattern, md)
 
-    def handleMatch(self, m: re.Match, data: str) -> tuple[ET.Element, int, int]:  # noqa: N802
+    def handleMatch(  # type: ignore[override]  # noqa: N802
+        self, m: re.Match[str], data: str
+    ) -> tuple[ET.Element | str | None, int | None, int | None]:
         del data
         el = utils.load_svg_icon(m.group(1), self.basepath)
 
@@ -44,14 +56,22 @@ class IconSVGInlineProcessor(markdown.inlinepatterns.InlineProcessor):
 class IconFontInlineProcessor(markdown.inlinepatterns.InlineProcessor):
     """Transform Webfont icon annotations into HTML."""
 
-    def handleMatch(self, m: re.Match, data: str) -> tuple[ET.Element, int, int]:  # noqa: N802
+    def handleMatch(  # type: ignore[override]  # noqa: N802
+        self, m: re.Match[str], data: str
+    ) -> tuple[ET.Element | str | None, int | None, int | None]:
         del data
         el = utils.make_webfont_icon(m.group(1))
         return el, m.start(0), m.end(0)
 
 
 class IconExtension(markdown.extensions.Extension):
-    """Extend markdown to support SVG icon annotations (``{svg}`name```)."""
+    """Extend markdown to support SVG icon annotations (``{svg}`name```).
+
+    Parameters
+    ----------
+    **kwargs
+        Assorted keyword parameters to be passed up to the parent's constructor.
+    """
 
     def __init__(self, **kwargs):
         self.config = {"basepath": [kwargs["basepath"], "Basepath to SVG static files"]}
@@ -72,6 +92,7 @@ def setup_extension(pelican_object: pelican.Pelican):
 
     Parameters
     ----------
+    pelican_object
         The pelican object with settings.
     """
     mdsettings = pelican_object.settings.get("MARKDOWN", {})

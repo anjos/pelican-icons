@@ -8,3 +8,8 @@ Files:
  tests/data/basic-usage/content/article.md
 Copyright: Copyright © 2024 Andre Anjos <andre.dos.anjos@gmail.com>
 License: MIT
+
+Files:
+ tests/data/svg/circle-check.svg
+Copyright: Copyright © 2024 Fonticons, Inc. <hello@fontawesome.com>
+License: CC-BY-4.0
