@@ -8,7 +8,7 @@ build-backend = "hatchling.build"
 [project]
 name = "pelican-icons"
 dynamic = ["version"]
-description = "Add SVG icons to content and templates"
+description = "Add SVG and webfont icons to Pelican content"
 readme = "README.md"
 authors = [{ name = "Andre Anjos", email = "andre.dos.anjos@gmail.com" }]
 license = "MIT"

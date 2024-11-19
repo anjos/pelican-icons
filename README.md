@@ -11,8 +11,8 @@ SPDX-License-Identifier: MIT
 
 # icons: A Plugin for Pelican
 
-This plugin simplifies adding SVG icons, inlined or referenced on your Pelican website
-content (pages and articles).
+This plugin simplifies adding SVG or webfont icons on your Pelican website content
+(pages and articles).
 
 ## Installation
 
