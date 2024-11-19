@@ -31,14 +31,21 @@ class IconSVGInlineProcessor(markdown.inlinepatterns.InlineProcessor):
     """
 
     def __init__(
-        self, pattern: str, md: markdown.core.Markdown | None, basepath: pathlib.Path
+        self,
+        pattern: str,
+        md: typing.Union[markdown.core.Markdown, None],
+        basepath: pathlib.Path,
     ):
         self.basepath = basepath
         super().__init__(pattern, md)
 
     def handleMatch(  # type: ignore[override]  # noqa: N802
         self, m: re.Match[str], data: str
-    ) -> tuple[ET.Element | str | None, int | None, int | None]:
+    ) -> tuple[
+        typing.Union[ET.Element, str, None],
+        typing.Union[int, None],
+        typing.Union[int, None],
+    ]:
         del data
         el = utils.load_svg_icon(m.group(1), self.basepath)
 
@@ -58,7 +65,11 @@ class IconFontInlineProcessor(markdown.inlinepatterns.InlineProcessor):
 
     def handleMatch(  # type: ignore[override]  # noqa: N802
         self, m: re.Match[str], data: str
-    ) -> tuple[ET.Element | str | None, int | None, int | None]:
+    ) -> tuple[
+        typing.Union[ET.Element, str, None],
+        typing.Union[int, None],
+        typing.Union[int, None],
+    ]:
         del data
         el = utils.make_webfont_icon(m.group(1))
         return el, m.start(0), m.end(0)
