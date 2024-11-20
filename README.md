@@ -119,9 +119,9 @@ Pelican website.  Some of them are listed below:
 
 ### Technique 2: Using webfonts
 
-You may also display icons use
+You may also display icons using
 [webfonts](https://fonts.google.com/knowledge/glossary/web_font). The main advantage of
-this approach compared to the direct SVG icon injection above is that font files can be
+this approach compared to the direct SVG icon embedding above is that font files can be
 cached, potentially speeding up load times.
 
 The process of using a webfont for icon drawing on HTML is composed of 2 parts: a)
