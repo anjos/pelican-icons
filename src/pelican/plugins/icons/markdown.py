@@ -36,8 +36,8 @@ class IconSVGInlineProcessor(markdown.inlinepatterns.InlineProcessor):
         md: typing.Union[markdown.core.Markdown, None],
         basepath: pathlib.Path,
     ):
-        self.basepath = basepath
         super().__init__(pattern, md)
+        self.basepath = basepath
 
     def handleMatch(  # type: ignore[override]  # noqa: N802
         self, m: re.Match[str], data: str
@@ -85,13 +85,13 @@ class IconExtension(markdown.extensions.Extension):
     """
 
     def __init__(self, **kwargs):
-        self.config = {"basepath": [kwargs["basepath"], "Basepath to SVG static files"]}
+        self.basepath = kwargs.pop("basepath")
         super().__init__(**kwargs)
 
     def extendMarkdown(self, md: markdown.core.Markdown):  # noqa: N802
         pattern = r"{svg}`(.*)`"  # like {svg}`circle-check`
         md.inlinePatterns.register(
-            IconSVGInlineProcessor(pattern, md, self.config["basepath"][0]), "svg", 999
+            IconSVGInlineProcessor(pattern, md, self.basepath), "svg", 999
         )
 
         pattern = r"{icon}`(.*)`"  # like {icon}`fa-regular fa-circle-check`
